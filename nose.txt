@@ -1,0 +1,128 @@
+accounts
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdAccount (Primaria)	int(11)	No				
+Email	varchar(50)	No				
+Contrasena	varchar(30)	No				
+UltimaModificacion	datetime	No	current_timestamp()			
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdAccount	1	A	No	
+aerolineas
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdAerolinea (Primaria)	int(11)	No				
+Descripcion	varchar(30)	No				
+Ubicacion	varchar(100)	No				
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdAerolinea	0	A	No	
+aviones
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdAvion (Primaria)	int(11)	No				
+Capacidad	int(11)	No				
+Tamaño	char(10)	No				
+Marca	varchar(30)	No				
+IdAerolinea	int(11)	No		aerolineas -> IdAerolinea		
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdAvion	0	A	No	
+IdAerolinea	BTREE	No	No	IdAerolinea	0	A	No	
+pasajeros
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdPasajero (Primaria)	int(11)	No				
+IdAccount	int(11)	Sí	NULL	accounts -> IdAccount		
+NombreCompleto	varchar(50)	No				
+Telefono	mediumint(9)	No				
+DocumentoIdentidad	int(11)	No				
+Genero	char(20)	No				
+TipoDocumento	char(20)	No				
+FechaNacimiento	date	No				
+UltimaModificacion	datetime	No	current_timestamp()			
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdPasajero	0	A	No	
+IdAccount	BTREE	No	No	IdAccount	0	A	Sí	
+reservas
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdReserva (Primaria)	int(11)	No				
+IdVuelo	int(11)	No		vuelos -> IdVuelo		
+IdAccount	int(11)	No		accounts -> IdAccount		
+PrecioTotal	int(10)	No				
+FechaReserva	datetime	No	current_timestamp()			
+EstadoPago	tinyint(1)	No				
+UltimaModificacion	datetime	No	current_timestamp()			
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdReserva	0	A	No	
+IdVuelo	BTREE	No	No	IdVuelo	0	A	No	
+IdAccount	BTREE	No	No	IdAccount	0	A	No	
+reservas_pasajeros
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdRelacionrp (Primaria)	int(11)	No				
+IdReserva	int(11)	No		reservas -> IdReserva		
+IdPasajero	int(11)	No		pasajeros -> IdPasajero		
+IdSilla	int(11)	No		sillas -> IdSilla		
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdRelacionrp	0	A	No	
+IdReserva	BTREE	Sí	No	IdReserva	0	A	No	
+IdPasajero	0	A	No
+IdPasajero	BTREE	No	No	IdPasajero	0	A	No	
+IdReserva_2	BTREE	No	No	IdReserva	0	A	No	
+IdPasajero	0	A	No
+IdSilla	BTREE	No	No	IdSilla	0	A	No	
+servicios
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdServicio (Primaria)	int(11)	No				
+Descripcion	varchar(100)	No				
+Precio	int(11)	No				
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdServicio	0	A	No	
+sillas
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdSilla (Primaria)	int(11)	No				
+IdAvion	int(11)	No		aviones -> IdAvion		
+IdTipoSilla	int(11)	No		tiposillas -> IdTipoSilla		
+Disponible	tinyint(1)	No				
+Precio	int(11)	No				
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdSilla	0	A	No	
+IdAvion	BTREE	No	No	IdAvion	0	A	No	
+IdTipoSilla	BTREE	No	No	IdTipoSilla	0	A	No	
+tiposillas
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdTipoSilla (Primaria)	int(11)	No				
+Descripcion	varchar(100)	No				
+Precio	int(11)	No				
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdTipoSilla	0	A	No	
+vuelos
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdVuelo (Primaria)	int(11)	No				
+FechaSalida	datetime	No				
+FechaVuelta	datetime	No				
+PrecioIda	int(10)	No				
+PrecioVuelta	int(10)	No				
+Destino	varchar(100)	No				
+Origen	varchar(100)	No				
+IdAvion	int(11)	No		aviones -> IdAvion		
+Estado	tinyint(1)	No				
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdVuelo	0	A	No	
+IdAvion	BTREE	No	No	IdAvion	0	A	No	
+vuelos_servicios
+Columna	Tipo	Nulo	Predeterminado	Enlaces a	Comentarios	Tipo de medio
+IdVuelo (Primaria)	int(11)	No		vuelos -> IdVuelo		
+IdServicio (Primaria)	int(11)	No		servicios -> IdServicio		
+Índices
+Nombre de la clave	Tipo	Único	Empaquetado	Columna	Cardinalidad	Cotejamiento	Nulo	Comentario
+PRIMARY	BTREE	Sí	No	IdVuelo	0	A	No	
+IdServicio	0	A	No
+IdServicio	BTREE	No	No	IdServicio	0	A	No	
+
+
+
+esa es toda mi base de datos analizala bien, solo necesito que en reserva se bloqueenlos vuelos que no tengan asientos disponibles
